@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+function search_with_ack() {
+  ack                                 \
+    --type-set coffee=.coffee         \
+    --type-set md=.md                 \
+    --type=coffee                     \
+    --type=python                     \
+    --type=sql                        \
+    --type=md                         \
+    --ignore-dir=node_modules         \
+    --group                           \
+    --context=3                       \
+    --follow                          \
+    --color                           \
+    "$1"                              \
+    ~/jzr                             \
+    ~/io                              \
+    | less -SR
+  # --nogroup                         \
+  # | grep -v -Pi 'node_modules'
+  }
+
+function search_with_ripgrep() {
+  source ~/bin/trm
+  # echo -e "$blue$reverse""see https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md$reset"
+  # echo -e "$blue$reverse""see https://beyondgrep.com/feature-comparison/$reset"
+  set -x
+  rg                                  \
+    --line-number                     \
+    --no-follow                       \
+    --color ansi                      \
+    "$@"                              \
+    | less -SRN\#5
+    # | sort \
+    # | fzf --ansi
+    # | sort \
+    # --pcre2                           \ ### not yet implemented, but already mentioned on https://github.com/BurntSushi/ripgrep
+    # --files                           \
+    # -g '!*.ttf|!*.png|!*.json' \
+    # --context 2                       \
+    # --follow                          \
+  set +x
+  }
+
+search_with_ripgrep "$@"
+
+# find-anywhere --glob='*.coffee'  -Pi 'drop' --replace='🌈$0' ~/jzr/hengist/dev ~/jzr | column --table --separator='🌈' | less -SR#5
+
+
