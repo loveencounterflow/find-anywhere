@@ -8,6 +8,7 @@
 
 - [What It Is](#what-it-is)
 - [How to Use It](#how-to-use-it)
+- [Implementation](#implementation)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -20,7 +21,10 @@ very fast text searching with KWIC-like output, built with ripgrep
 ## How to Use It
 
 ```sh
-find-anywhere --glob='*.coffee'  -Pi 'drop' --replace='🌈$0' ~/jzr/hengist/dev ~/jzr | column --table --separator='🌈' | less -SR#5
+find-anywhere --glob='*.coffee'  -Pi 'require' path/to/folder another/path
 ```
 
+## Implementation
+
+Slim wrapper around [ripgrep](https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md).
 
