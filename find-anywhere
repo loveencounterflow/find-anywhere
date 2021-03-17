@@ -25,7 +25,32 @@ function search_with_ripgrep_plain() {
   set +x
   }
 
-search_with_ripgrep "$@"
+function search_with_ripgrep_kwic() {
+  # source ~/bin/trm
+  # echo -e "$blue$reverse""see https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md$reset"
+  # echo -e "$blue$reverse""see https://beyondgrep.com/feature-comparison/$reset"
+  set -x
+  rg                                        \
+    --line-number                           \
+    --no-follow                             \
+    --color ansi                            \
+    --replace "$rainbow\$0"                 \
+    "$@"                                    \
+    | column --table --separator="$rainbow" \
+    | less -SRN\#5
+    # | sort \
+    # | fzf --ansi
+    # | sort \
+    # --pcre2                           \ ### not yet implemented, but already mentioned on https://github.com/BurntSushi/ripgrep
+    # --files                           \
+    # -g '!*.ttf|!*.png|!*.json' \
+    # --context 2                       \
+    # --follow                          \
+  set +x
+  }
+
+# search_with_ripgrep_plain "$@"
+search_with_ripgrep_kwic "$@"
 
 
 
