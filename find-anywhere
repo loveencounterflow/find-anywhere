@@ -1,26 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-function search_with_ack() {
-  ack                                 \
-    --type-set coffee=.coffee         \
-    --type-set md=.md                 \
-    --type=coffee                     \
-    --type=python                     \
-    --type=sql                        \
-    --type=md                         \
-    --ignore-dir=node_modules         \
-    --group                           \
-    --context=3                       \
-    --follow                          \
-    --color                           \
-    "$1"                              \
-    ~/jzr                             \
-    ~/io                              \
-    | less -SR
-  # --nogroup                         \
-  # | grep -v -Pi 'node_modules'
-  }
 
 function search_with_ripgrep() {
   source ~/bin/trm
