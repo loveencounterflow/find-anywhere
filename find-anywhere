@@ -46,6 +46,5 @@ function search_with_ripgrep() {
 
 search_with_ripgrep "$@"
 
-# find-anywhere --glob='*.coffee'  -Pi 'drop' --replace='🌈$0' ~/jzr/hengist/dev ~/jzr | column --table --separator='🌈' | less -SR#5
 
 
