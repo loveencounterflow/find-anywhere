@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+rainbow=🌈🌈🌈
 
-function search_with_ripgrep() {
-  source ~/bin/trm
+function search_with_ripgrep_plain() {
+  # source ~/bin/trm
   # echo -e "$blue$reverse""see https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md$reset"
   # echo -e "$blue$reverse""see https://beyondgrep.com/feature-comparison/$reset"
   set -x
