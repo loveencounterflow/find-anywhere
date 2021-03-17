@@ -2,6 +2,42 @@
 set -euo pipefail
 
 rainbow=🌈🌈🌈
+# blink='\x1b[5m'
+# bold='\x1b[1m'
+# reverse='\x1b[7m'
+# underline='\x1b[4m'
+# reset='\x1b[0m'
+# black='\x1b[38;05;16m'
+# blue='\x1b[38;05;27m'
+# green='\x1b[38;05;34m'
+# cyan='\x1b[38;05;51m'
+# sepia='\x1b[38;05;52m'
+# indigo='\x1b[38;05;54m'
+# steel='\x1b[38;05;67m'
+# brown='\x1b[38;05;94m'
+# olive='\x1b[38;05;100m'
+# lime='\x1b[38;05;118m'
+# red='\x1b[38;05;124m'
+# crimson='\x1b[38;05;161m'
+# plum='\x1b[38;05;176m'
+# pink='\x1b[38;05;199m'
+# orange='\x1b[38;05;208m'
+# gold='\x1b[38;05;214m'
+# tan='\x1b[38;05;215m'
+# yellow='\x1b[38;05;226m'
+# grey='\x1b[38;05;240m'
+# darkgrey='\x1b[38;05;234m'
+# white='\x1b[38;05;255m'
+
+# thx to https://stackoverflow.com/a/29754866/256361
+# -allow a command to fail with !’s side effect on errexit
+# -use return value from ${PIPESTATUS[0]}, because ! hosed $?
+! getopt --test > /dev/null
+if [[ ${PIPESTATUS[0]} -ne 4 ]]; then
+    echo 'I’m sorry, `getopt --test` failed in this environment.'
+    exit 1
+fi
+
 
 function search_with_ripgrep_plain() {
   # source ~/bin/trm
@@ -26,9 +62,6 @@ function search_with_ripgrep_plain() {
   }
 
 function search_with_ripgrep_kwic() {
-  # source ~/bin/trm
-  # echo -e "$blue$reverse""see https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md$reset"
-  # echo -e "$blue$reverse""see https://beyondgrep.com/feature-comparison/$reset"
   set -x
   rg                                        \
     --line-number                           \
@@ -38,19 +71,38 @@ function search_with_ripgrep_kwic() {
     "$@"                                    \
     | column --table --separator="$rainbow" \
     | less -SRN\#5
-    # | sort \
-    # | fzf --ansi
-    # | sort \
-    # --pcre2                           \ ### not yet implemented, but already mentioned on https://github.com/BurntSushi/ripgrep
-    # --files                           \
-    # -g '!*.ttf|!*.png|!*.json' \
-    # --context 2                       \
-    # --follow                          \
   set +x
   }
 
+
+
+# # thx to https://stackoverflow.com/a/13359121/256361
+# kwic=false
+# for i in "$@"; do
+#   case $i in
+#     # -p=*|--prefix=*)
+#     # PREFIX="${i#*=}"
+
+#     # ;;
+#     # -s=*|--searchpath=*)
+#     # SEARCHPATH="${i#*=}"
+#     # ;;
+#     # -l=*|--lib=*)
+#     # DIR="${i#*=}"
+#     # ;;
+#     -k|--kwic)
+#     kwic=true
+#     shift
+#     ;;
+#     *)
+#       echo "$i"
+#     #   echo "$red""Unknown option $i""$reset"
+#     #   # echo "$lime"
+#     #   exit 1
+#     ;;
+#     esac
+#   done
+# echo kwic = ${kwic}
+# echo "$@"
 # search_with_ripgrep_plain "$@"
 search_with_ripgrep_kwic "$@"
-
-
-
