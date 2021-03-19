@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# thx to https://www.commandlinefu.com/commands/view/1419/list-all-executables-in-your-path
+
+# ls `echo $PATH | sed 's/:/ /g'` | less -SR#5
+
+ls $(echo $PATH | sed 's/:/ /g' | less -SR#5)
+
