@@ -50,7 +50,6 @@ function search_with_ripgrep_plain() {
     --color ansi                      \
     "$@"                              \
     | less -SRN\#5
-    # | sort \
     # | fzf --ansi
     # | sort \
     # --pcre2                           \ ### not yet implemented, but already mentioned on https://github.com/BurntSushi/ripgrep
@@ -104,5 +103,5 @@ function search_with_ripgrep_kwic() {
 #   done
 # echo kwic = ${kwic}
 # echo "$@"
-# search_with_ripgrep_plain "$@"
-search_with_ripgrep_kwic "$@"
+search_with_ripgrep_plain "$@"
+# search_with_ripgrep_kwic "$@"
